@@ -30,6 +30,7 @@ const App: () => Node = () => {
         <SafeAreaView>
           <View>
             <Text>{uiStore.colorScheme.type}</Text>
+            <Button title="Press me" onPress={() => uiStore.switchDayNight()} />
           </View>
         </SafeAreaView>
       )}

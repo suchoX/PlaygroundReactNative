@@ -12,7 +12,6 @@ class UiStore {
   }
 
   switchDayNight = () => {
-    console.log('weferf');
     if (this.colorScheme.type === 'day') {
       this.colorScheme = nightColorScheme;
     } else if (this.colorScheme.type === 'night') {
