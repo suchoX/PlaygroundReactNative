@@ -15,7 +15,6 @@ import {useUiStore, useQuotesStore} from './stores';
 const QuotesListView: () => Node = () => {
   const quotesStore = useQuotesStore();
   quotesStore.fetchKanyeQuotes();
-  console.log(quotesStore.quotes[0].quote);
   return (
     <Observer>
       {() => (

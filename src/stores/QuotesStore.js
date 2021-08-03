@@ -13,28 +13,21 @@ class QuotesStore {
     makeObservable(this, {
       quotes: observable,
       fetchKanyeQuotes: action,
-      kanyeQuotesFetchSuccess: action,
-      kanyeQuotesFetchFailure: action,
     });
   }
 
   fetchKanyeQuotes = () => {
     fetchKanyeQuotes().then(
-      this.kanyeQuotesFetchSuccess,
-      this.kanyeQuotesFetchFailure,
+      action(response => {
+        this.quotes[0] = {
+          id: 1,
+          quote: response.data.quote,
+        };
+      }),
+      action(error => {
+        console.log(error);
+      }),
     );
-  };
-
-  kanyeQuotesFetchSuccess = response => {
-    console.log(response.data.quote);
-    this.quotes[0] = {
-      id: 1,
-      quote: response.data.quote,
-    };
-  };
-
-  kanyeQuotesFetchFailure = error => {
-    this.state = 'error';
   };
 }
 
