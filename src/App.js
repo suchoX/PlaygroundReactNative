@@ -8,35 +8,38 @@
 
 import React from 'react';
 import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  useColorScheme,
-  Text,
-  View,
-  Button,
-} from 'react-native';
+import {SafeAreaView, StyleSheet, Text, FlatList, View} from 'react-native';
 import {Observer} from 'mobx-react';
-import {useUiStore} from './stores';
+import {useUiStore, useQuotesStore} from './stores';
+
+const QuotesListView: () => Node = () => {
+  const quotesStore = useQuotesStore();
+  quotesStore.fetchKanyeQuotes();
+  console.log(quotesStore.quotes[0].quote);
+  return (
+    <Observer>
+      {() => (
+        <View>
+          <Text>{quotesStore.quotes[0].quote}</Text>
+        </View>
+      )}
+    </Observer>
+  );
+};
 
 const App: () => Node = () => {
   const uiStore = useUiStore();
   return (
-    <Observer>
-      {() => (
-        <SafeAreaView
-          style={[
-            styles.container,
-            {backgroundColor: uiStore.colorScheme.primaryColor},
-          ]}>
-          <Text style={styles.quotesHeading}>
-            {'Random Quotes that make Sense'}
-          </Text>
-        </SafeAreaView>
-      )}
-    </Observer>
+    <SafeAreaView
+      style={[
+        styles.container,
+        {backgroundColor: uiStore.colorScheme.primaryColor},
+      ]}>
+      <Text style={styles.quotesHeading}>
+        {'Random Quotes that make Sense'}
+      </Text>
+      <QuotesListView />
+    </SafeAreaView>
   );
 };
 

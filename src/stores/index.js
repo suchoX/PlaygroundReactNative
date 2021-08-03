@@ -1,6 +1,10 @@
 import React from 'react';
 import UiStore from './UiStore';
+import QuotesStore from './QuotesStore';
 
-const StoresContext = React.createContext(new UiStore());
+const uiStoreContext = React.createContext(new UiStore());
+const quotesStoreContext = React.createContext(new QuotesStore());
 
-export const useUiStore = () => React.useContext(StoresContext);
+const useUiStore = () => React.useContext(uiStoreContext);
+const useQuotesStore = () => React.useContext(quotesStoreContext);
+export {useUiStore, useQuotesStore};
