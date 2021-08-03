@@ -17,7 +17,6 @@ import {
   Text,
   View,
   Button,
-  Alert,
 } from 'react-native';
 import {Observer} from 'mobx-react';
 import {useUiStore} from './stores';
@@ -27,11 +26,14 @@ const App: () => Node = () => {
   return (
     <Observer>
       {() => (
-        <SafeAreaView>
-          <View>
-            <Text>{uiStore.colorScheme.type}</Text>
-            <Button title="Press me" onPress={() => uiStore.switchDayNight()} />
-          </View>
+        <SafeAreaView
+          style={[
+            styles.container,
+            {backgroundColor: uiStore.colorScheme.primaryColor},
+          ]}>
+          <Text style={styles.quotesHeading}>
+            {'Random Quotes that make Sense'}
+          </Text>
         </SafeAreaView>
       )}
     </Observer>
@@ -39,6 +41,15 @@ const App: () => Node = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  quotesHeading: {
+    fontSize: 36,
+    fontWeight: 'bold',
+    textAlign: 'right',
+    alignSelf: 'stretch',
+  },
   sectionContainer: {
     marginTop: 32,
     paddingHorizontal: 24,
